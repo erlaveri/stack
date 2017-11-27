@@ -21,9 +21,9 @@ router.post('/', function (req, res, next) {
     console.log(kittens);
   });
 
-  console.log(silence.name); //
+  console.log(silence.name);
 
-  res.redirect('/')
+  res.redirect('/');
 });
 
 module.exports = router;
