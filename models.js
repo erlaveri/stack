@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var kittySchema = mongoose.Schema({
+const noteSchema = mongoose.Schema({
   name: String
 });
 
-var Kitten = mongoose.model('Kitten', kittySchema);
+const Note = mongoose.model('Note', noteSchema);
 
-module.exports = { Kitten };
+module.exports = { Note };
