@@ -12,6 +12,7 @@ const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+const hbs = require('hbs');
 app.set('view engine', 'hbs');
 
 
