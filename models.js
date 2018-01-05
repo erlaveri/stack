@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const conceptSchema = mongoose.Schema({
-  name: String
+  id: { type: mongoose.Schema.ObjectId, auto: true },
+  name: String,
+  type: String,
 });
 
 const Concept = mongoose.model('Note', conceptSchema);

@@ -26,7 +26,13 @@ router.post('*', function (req, res, next) {
 });
 
 router.get('*', async function (req, res, next) {
-  const concepts = await Concept.find();
+  const concepts = await Concept.find().lean().exec();
+  res.send(concepts);
+});
+
+router.delete('*', async function (req, res, next) {
+  const ll = await Concept.remove({ _id: req.body.id }).exec();
+  res.send('hi2');
 });
 
 
