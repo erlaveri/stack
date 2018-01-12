@@ -1,39 +1,49 @@
 const express = require('express');
 const router = express.Router();
+
+const _ = require('lodash');
 const { Concept } = require('../models');
 
 
-router.post('*', function (req, res, next) {
-  res.send('respond with a xxxx');
+router.route('/')
+  .post(function (req, res) {
+    let { data, type } = req.body;
+    data = data.trim();
+    data = data.replace(/[\u2013\u2014]/g, '-'); // It replaces all &ndash; (–) and &mdash; (—) symbols with simple dashes (-).
+    data = data.split(/\n/); // data.split(/\n|\t/);
+    data = _.groupBy(data, item => (item.match(/-/g) || []).length === 1);
 
-  const concept = new Concept(req.body);
+    let normal = data['true'] || [];
+    let ambiguous = data['false'] || [];
 
-  console.log(req.body);
+    normal = normal
+      .map(initialStr => initialStr.split('-'))
+      .map(item => ({
+        1: item[0].trim().split(',').map(item => item.trim()),
+        2: item[1].trim().split(',').map(item => item.trim()),
+      }));
 
+    res.send({normal, ambiguous});
+  })
+  .put(function (req, res) {
+    const concept = new Concept({ text1: ['kek'], text2: ['lolec'] });
 
-  // concept.save(function (err, note) {
-  //   if (err) {
-  //     return console.error(err);
-  //   }
-  // });
-  //
-  //
-  // Concept.find(function (err, kittens) {
-  //   if (err) return console.error(err);
-  //   console.log(kittens);
-  // });
+    concept.save(function (err, note) {
+      if (err) {
+        return console.error(err);
+      }
+    });
 
-});
-
-router.get('*', async function (req, res, next) {
-  const concepts = await Concept.find().lean().exec();
-  res.send(concepts);
-});
-
-router.delete('*', async function (req, res, next) {
-  const ll = await Concept.remove({ _id: req.body.id }).exec();
-  res.send('hi2');
-});
+    res.send('ok')
+  })
+  .get(async function (req, res) {
+    const concepts = await Concept.find().lean().exec();
+    res.send(concepts);
+  })
+  .delete(async function (req, res, next) {
+    const ll = await Concept.remove({ _id: req.body.id }).exec();
+    res.send('hi2');
+  });
 
 
 module.exports = router;
