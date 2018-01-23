@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const _ = require('lodash');
-const { Concept } = require('../models');
+const { Term } = require('../models');
 
 
 router.route('/')
@@ -26,7 +26,7 @@ router.route('/')
     res.send({normal, ambiguous});
   })
   .put(function (req, res) {
-    const concept = new Concept({ text1: ['kek'], text2: ['lolec'] });
+    const concept = new Term({ text1: ['kek'], text2: ['lolec'] });
 
     concept.save(function (err, note) {
       if (err) {
@@ -37,11 +37,11 @@ router.route('/')
     res.send('ok')
   })
   .get(async function (req, res) {
-    const concepts = await Concept.find().lean().exec();
+    const concepts = await Term.find().lean().exec();
     res.send(concepts);
   })
   .delete(async function (req, res, next) {
-    const ll = await Concept.remove({ _id: req.body.id }).exec();
+    const ll = await Term.remove({ _id: req.body.id }).exec();
     res.send('hi2');
   });
 

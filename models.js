@@ -7,4 +7,4 @@ const conceptSchema = mongoose.Schema({
 
 const Concept = mongoose.model('Note', conceptSchema);
 
-module.exports = { Concept };
+module.exports = { Term: Concept };
