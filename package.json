@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env PORT=3002 DEBUG=redictows:*  node ./bin/www"
+    "start": "node ./bin/www",
+    "start:dev": "cross-env DEBUG=redictows:*  node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~3.1.0",
+    "dotenv": "^4.0.0",
     "express": "~4.16.2",
     "helmet": "^3.9.0",
     "jade": "^1.11.0",

@@ -1,10 +1,10 @@
 const express = require('express');
-const path = require('path');
 const router = express.Router();
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.sendFile('views/test.html', { root: path.dirname(__dirname) });
+  res.sendFile('index.html', { root: 'ui' });
 });
 
 module.exports = router;

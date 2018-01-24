@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const api = require('./api');
 
+require('dotenv').config();
 const app = express();
 
 // view engine setup
@@ -21,9 +22,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/ui', express.static('ui', { fallthrough: false }));
 
-app.use('/', index);
+
 app.use('/api', api);
+app.use('/*', index);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -45,9 +49,7 @@ app.use(function (err, req, res, next) {
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test2', {
-  useMongoClient: true,
-});
+mongoose.connect('mongodb://localhost/test2');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
