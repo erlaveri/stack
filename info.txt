@@ -1,4 +1,4 @@
-DEBUG=redictows:* npm start
+DEBUG=blog-ws:* npm start
 
 
 Install mongodb:
