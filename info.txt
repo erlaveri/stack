@@ -1,4 +1,4 @@
-DEBUG=blog-ws:* npm start
+DEBUG=stack:* npm start
 
 
 Install mongodb:

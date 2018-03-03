@@ -4,4 +4,6 @@ const PostSchema = mongoose.Schema({
   content: String
 });
 
-mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Post', PostSchema);
+
+module.exports = Post;
