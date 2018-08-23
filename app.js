@@ -5,9 +5,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const index = require('./routes/index');
-const api = require('./api');
-
 require('dotenv').config();
 const app = express();
 
@@ -25,6 +22,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/ui', express.static('ui', { fallthrough: false }));
 
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test3');
+require('./models/Note');
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log('we\'re connected!')
+});
+
+const index = require('./routes/index');
+const api = require('./api');
 app.use('/api', api);
 app.use('/*', index);
 
@@ -46,16 +55,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test2');
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  console.log('we\'re connected!')
-});
-
 
 module.exports = app;

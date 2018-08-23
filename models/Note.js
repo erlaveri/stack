@@ -1,9 +1,21 @@
 const mongoose = require('mongoose');
+const utils = require('../utils');
 
-const ItemSchema = mongoose.Schema({
-  name: String
-});
+// const NoteSchema = mongoose.Schema();
+// NoteSchema.add({
+//   title: String,
+//   type: String,
+//   data: String,
+//   // parts: [NoteSchema],
+// });
 
-const Item = mongoose.model('Item', ItemSchema);
+const NoteSchema = mongoose.Schema({
+  title: String,
+  type: String,
+  data: String,
+  // parts: [NoteSchema],
+}, utils.getDefaultSchemaOptions());
 
-module.exports = { Item };
+const Note = mongoose.model('Note', NoteSchema);
+
+module.exports = Note;

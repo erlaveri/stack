@@ -4,22 +4,23 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "cross-env PORT=3002 DEBUG=stack:* node ./bin/www"
+    "start:dev": "cross-env PORT=3002 DEBUG=stack:* nodemon --inspect ./bin/www"
   },
   "dependencies": {
     "body-parser": "1.18.2",
     "cookie-parser": "1.4.3",
     "debug": "3.1.0",
     "dotenv": "5.0.1",
-    "express": "4.16.2",
+    "express": "4.16.3",
     "helmet": "3.12.0",
     "jade": "1.11.0",
-    "lodash": "4.17.5",
-    "mongoose": "5.0.8",
+    "lodash": "4.17.10",
+    "mongoose": "5.0.18",
     "morgan": "1.9.0",
-    "serve-favicon": "2.4.5"
+    "serve-favicon": "2.5.0",
+    "shellit": "0.0.1"
   },
   "devDependencies": {
-    "cross-env": "5.1.3"
+    "cross-env": "5.1.5"
   }
 }
